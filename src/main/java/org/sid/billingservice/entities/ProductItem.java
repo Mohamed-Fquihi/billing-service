@@ -1,5 +1,7 @@
 package org.sid.billingservice.entities;
 
+
+
 import org.sid.billingservice.model.Product;
 
 import javax.persistence.*;
@@ -13,6 +15,7 @@ public class ProductItem {
     private long productID;
     @ManyToOne
     private Bill bill;
+    @Transient
     private Product product;
 }
 
