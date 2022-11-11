@@ -1,5 +1,6 @@
 package org.sid.billingservice;
 
+import org.sid.billingservice.entities.Bill;
 import org.sid.billingservice.feign.CustomerRestClient;
 import org.sid.billingservice.feign.ProductItemRestClient;
 import org.sid.billingservice.model.Customer;
@@ -12,6 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Collection;
+import java.util.Date;
 
 @SpringBootApplication
 @EnableFeignClients
@@ -28,6 +30,7 @@ public class BillingServiceApplication {
                             ProductItemRestClient productItemRestClient){
         return args -> {
             Customer customer=customerRestClient.getCustomerById(1L);
+            billRepository.save(new Bill(null,new Date(),null,customer.getId(),null));
             System.out.println("----------------------");
             System.out.println(customer.getId());
             System.out.println(customer.getName());
